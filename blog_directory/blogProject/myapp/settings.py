@@ -25,10 +25,7 @@ SECRET_KEY = 'django-insecure--9!xelql-!^0#zh6&verpa)1n2z!qptqg2xt7tiyt-7912i17p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -58,7 +55,10 @@ ROOT_URLCONF = 'myapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['base_template'],
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR.parent.parent / 'base_template',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +120,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 staticfiles_dir = ['/blog/static/blog/']
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+
+    'loggers': {
+        'TESTING': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
